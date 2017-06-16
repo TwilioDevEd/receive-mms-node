@@ -20,7 +20,7 @@ To run the app locally:
 1. Clone this repository and `cd` into it
 
    ```bash
-   git clone git@github.com:TwilioDevEd/receive-mms-node.git
+   git clone git@github.com:TwilioDevEd/receive-mms-node.git && \
 
    cd receive-mms-node
    ```
@@ -28,7 +28,7 @@ To run the app locally:
 1. Install dependencies
 
     ```bash
-    npm install -g yarn
+    npm install -g yarn && \
     yarn install
     ```
 
@@ -46,14 +46,14 @@ To run the app locally:
 1. Run the application
 
     ```bash
-    $ yarn start
+    yarn start
     ```
     Alternatively you might also consider using [nodemon](https://github.com/remy/nodemon) for this. It works just like
     the node command but automatically restarts your application when you change any source code files.
 
     ```bash
-    $ yarn global add nodemon
-    $ nodemon ./bin/www
+    yarn global add nodemon && \
+    nodemon index.js 
     ```
 
 1. Check it out at [http://localhost:3000](http://localhost:3000)
@@ -65,7 +65,7 @@ That's it
 You can run the tests locally by typing
 
 ```bash
-$ yarn test
+yarn test
 ```
 
 ## Meta
