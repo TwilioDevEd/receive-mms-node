@@ -28,9 +28,9 @@ function MessagingRouter() {
     const client = getTwilioClient();
 
     return client
-    .api.accounts(twilioAccountSid)
-    .messages(mediaItem.MessageSid)
-    .media(mediaItem.mediaSid).remove();
+      .api.accounts(twilioAccountSid)
+      .messages(mediaItem.MessageSid)
+      .media(mediaItem.mediaSid).remove();
   }
 
   async function SaveMedia(mediaItem) {
