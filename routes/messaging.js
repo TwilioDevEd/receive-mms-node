@@ -7,7 +7,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const config = require('../config');
 
-const PUBLIC_DIR = './mms_images';
+const PUBLIC_DIR = './public/mms_images';
 const { twilioPhoneNumber, twilioAccountSid, twilioAuthToken } = config;
 const { MessagingResponse } = Twilio.twiml;
 const { NODE_ENV } = process.env;
@@ -16,36 +16,46 @@ function MessagingRouter() {
   let twilioClient;
   let images = [];
 
-  function getTwilioClient() {
-    return twilioClient || new Twilio(twilioAccountSid, twilioAuthToken);
+  if (!fs.existsSync(PUBLIC_DIR)) {
+    fs.mkdirSync(path.resolve(PUBLIC_DIR));
   }
 
-  async function SaveFromUrl(url, filename) {
-    if (NODE_ENV !== 'test') {
-      fs.mkdirSync(path.resolve(PUBLIC_DIR));
-      const response = await fetch(url);
-      const fullPath = path.resolve(`${PUBLIC_DIR}/${filename}`);
-      const fileStream = fs.createWriteStream(fullPath);
-
-      response.body.pipe(fileStream);
-
-      images.push(filename);
-    }
+  function getTwilioClient() {
+    return twilioClient || new Twilio(twilioAccountSid, twilioAuthToken);
   }
 
   function deleteMediaItem(mediaItem) {
     const client = getTwilioClient();
 
     return client
-      .api.accounts(twilioAccountSid)
-      .messages(mediaItem.MessageSid)
-      .media(mediaItem.mediaSid).remove();
+    .api.accounts(twilioAccountSid)
+    .messages(mediaItem.MessageSid)
+    .media(mediaItem.mediaSid).remove();
   }
+
+  async function SaveMedia(mediaItem) {
+    const { mediaUrl, filename } = mediaItem;
+    if (NODE_ENV !== 'test') {
+      const fullPath = path.resolve(`${PUBLIC_DIR}/${filename}`);
+
+      if (!fs.existsSync(fullPath)) {
+        const response = await fetch(mediaUrl);
+        const fileStream = fs.createWriteStream(fullPath);
+
+        response.body.pipe(fileStream);
+
+        deleteMediaItem(mediaItem);
+      }
+
+      images.push(filename);
+    }
+  }
+
 
   async function handleIncomingMMS(req, res) {
     const { body } = req;
     const { NumMedia, From: SenderNumber, MessageSid } = body;
-    const saveOperations = [];
+    let saveOperations = [];
     const mediaItems = [];
 
     for (var i = 0; i < NumMedia; i++) {  // eslint-disable-line
@@ -55,15 +65,11 @@ function MessagingRouter() {
       const mediaSid = path.basename(urlUtil.parse(mediaUrl).pathname);
       const filename = `${mediaSid}.${extension}`;
 
-      mediaItems.push({ mediaSid, MessageSid });
-
-      saveOperations.push(SaveFromUrl(mediaUrl, filename));
+      mediaItems.push({ mediaSid, MessageSid, mediaUrl, filename });
+      saveOperations = mediaItems.map(mediaItem => SaveMedia(mediaItem));
     }
 
     await Promise.all(saveOperations);
-
-    const deleteMediaItems = mediaItems.map(mediaItem => deleteMediaItem(mediaItem));
-    await Promise.all(deleteMediaItems);
 
     const messageBody = NumMedia === 0 ?
     'Send us an image!' :
@@ -92,14 +98,14 @@ function MessagingRouter() {
     clearRecentImages();
   }
 
+  /**
+   * Initialize router and define routes.
+   */
   const router = express.Router();
-
   router.post('/incoming', handleIncomingMMS);
-
   router.get('/config', (req, res) => {
     res.status(200).send({ twilioPhoneNumber });
   });
-
   router.get('/images', fetchRecentImages);
 
   return router;

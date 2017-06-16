@@ -49,7 +49,7 @@ describe('appointment', () => {
         .send(incomingMMS)
         .expect(200)
         .expect('<?xml version="1.0" encoding="UTF-8"?><Response>' +
-                '<Message from="+17072053552" to="+1707XXXXXXX">' +
+                '<Message from="+1707XXXXXXX" to="+1707XXXXXXX">' +
                 'Thanks for sending us 1 file(s)</Message></Response>');
     });
   });
@@ -66,7 +66,7 @@ describe('appointment', () => {
     it('retrieves images receieved via mms', () => {
       return agent.get('/images')
         .expect(200)
-        .expect({ twilioPhoneNumber });
+        .expect([]);
     });
   });
 });
