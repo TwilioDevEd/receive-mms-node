@@ -52,7 +52,7 @@ function MessagingRouter() {
   }
 
 
-  async function handleIncomingMMS(req, res) {
+  async function handleIncomingSMS(req, res) {
     const { body } = req;
     const { NumMedia, From: SenderNumber, MessageSid } = body;
     let saveOperations = [];
@@ -102,7 +102,7 @@ function MessagingRouter() {
    * Initialize router and define routes.
    */
   const router = express.Router();
-  router.post('/incoming', handleIncomingMMS);
+  router.post('/incoming', handleIncomingSMS);
   router.get('/config', (req, res) => {
     res.status(200).send({ twilioPhoneNumber });
   });
