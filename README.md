@@ -2,13 +2,12 @@
   <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
 </a>
 
-# Recieve SMS and MMS Messages. Powered by Twilio - Node.js/Express
+# Recieve and Download MMS Messages. Powered by Twilio - Node.js/Express
 
 [![Build
 Status](https://travis-ci.org/TwilioDevEd/receive-mms-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/receive-mms-node)
 
-#TODO: update this link
-Use Twilio to receive SMS and MMS messages. For a step-by-step tutorial see [twilio docs](https://www.twilio.com/docs/tutorials/walkthrough/appointment-reminders/node/express).
+Use Twilio to receive and download MMS messages. For a step-by-step tutorial see the [Twilio docs](https://www.twilio.com/docs/guides/receive-and-download-images-incoming-mms-messages-node).
 
 
 ## Local development
