@@ -9,6 +9,11 @@ Status](https://travis-ci.org/TwilioDevEd/receive-mms-node.svg?branch=master)](h
 
 Use Twilio to receive and download MMS messages. For a step-by-step tutorial see the [Twilio docs](https://www.twilio.com/docs/guides/receive-and-download-images-incoming-mms-messages-node).
 
+## Protect your webhooks
+
+Twilio supports HTTP Basic and Digest Authentication. Authentication allows you to password protect your TwiML URLs on your web server so that only you and Twilio can access them.
+
+Learn more about HTTP authentication [here](https://www.twilio.com/docs/usage/security#http-authentication), and check out [our full guide to securing your Express application by validating incoming Twilio requests](https://www.twilio.com/docs/usage/tutorials/how-to-secure-your-express-app-by-validating-incoming-twilio-requests).
 
 ## Local development
 
