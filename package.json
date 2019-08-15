@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
-    "cookie-parser": "~1.4.3",
+    "cookie-parser": "~1.4.4",
     "debug": "^2.6.8",
     "express": "^4.15.3",
     "ext-name": "^5.0.0",
