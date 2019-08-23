@@ -2,7 +2,7 @@
   <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
 </a>
 
-# Recieve and Download MMS Messages. Powered by Twilio - Node.js/Express
+# Receive and Download MMS Messages. Powered by Twilio - Node.js/Express
 
 [![Build
 Status](https://travis-ci.org/TwilioDevEd/receive-mms-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/receive-mms-node)
