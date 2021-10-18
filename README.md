@@ -4,8 +4,7 @@
 
 # Recieve and Download MMS Messages. Powered by Twilio - Node.js/Express
 
-[![Build
-Status](https://travis-ci.org/TwilioDevEd/receive-mms-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/receive-mms-node)
+[![Node.js CI](https://github.com/TwilioDevEd/receive-mms-node/actions/workflows/node.js.yml/badge.svg)](https://github.com/TwilioDevEd/receive-mms-node/actions/workflows/node.js.yml)
 
 Use Twilio to receive and download MMS messages. For a step-by-step tutorial see the [Twilio docs](https://www.twilio.com/docs/guides/receive-and-download-images-incoming-mms-messages-node).
 
