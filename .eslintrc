@@ -6,6 +6,7 @@
     },
     "rules": {
       "arrow-body-style": 1,
-      "global-require": 1
+      "global-require": 1,
+      "linebreak-style": 0
     }
 }
