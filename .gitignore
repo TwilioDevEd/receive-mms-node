@@ -33,7 +33,6 @@ node_modules
 .node_repl_history
 
 #local env file
-.env.local
 .env
 
 public/mms_images
