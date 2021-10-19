@@ -34,5 +34,6 @@ node_modules
 
 #local env file
 .env.local
+.env
 
 public/mms_images
