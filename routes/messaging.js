@@ -27,10 +27,11 @@ function MessagingRouter() {
   function deleteMediaItem(mediaItem) {
     const client = getTwilioClient();
 
-    return client
-      .api.accounts(twilioAccountSid)
+    return client.api
+      .accounts(twilioAccountSid)
       .messages(mediaItem.MessageSid)
-      .media(mediaItem.mediaSid).remove();
+      .media(mediaItem.mediaSid)
+      .remove();
   }
 
   async function SaveMedia(mediaItem) {
@@ -51,14 +52,14 @@ function MessagingRouter() {
     }
   }
 
-
   async function handleIncomingSMS(req, res) {
     const { body } = req;
     const { NumMedia, From: SenderNumber, MessageSid } = body;
     let saveOperations = [];
     const mediaItems = [];
 
-    for (var i = 0; i < NumMedia; i++) {  // eslint-disable-line
+    for (let i = 0; i < NumMedia; i += 1) {
+      // eslint-disable-line
       const mediaUrl = body[`MediaUrl${i}`];
       const contentType = body[`MediaContentType${i}`];
       const extension = extName.mime(contentType)[0].ext;
@@ -71,19 +72,22 @@ function MessagingRouter() {
 
     await Promise.all(saveOperations);
 
-    const messageBody = NumMedia === 0 ?
-    'Send us an image!' :
-    `Thanks for sending us ${NumMedia} file(s)`;
+    const messageBody =
+      NumMedia === 0
+        ? 'Send us an image!'
+        : `Thanks for sending us ${NumMedia} file(s)`;
 
     const response = new MessagingResponse();
-    response.message({
-      from: twilioPhoneNumber,
-      to: SenderNumber,
-    }, messageBody);
+    response.message(
+      {
+        from: twilioPhoneNumber,
+        to: SenderNumber,
+      },
+      messageBody,
+    );
 
     return res.send(response.toString()).status(200);
   }
-
 
   function getRecentImages() {
     return images;

@@ -38,7 +38,7 @@ describe('appointment', () => {
   beforeEach(() => {
     TwilioMock.twiml = Twilio.twiml;
     mockery.registerMock('twilio', TwilioMock);
-    const app = require('../app');  // eslint-disable-line global-require
+    const app = require('../app');// eslint-disable-line global-require
     agent = supertest(app);
   });
 
