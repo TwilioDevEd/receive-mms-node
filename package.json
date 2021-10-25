@@ -2,10 +2,9 @@
   "name": "receive-mms-node",
   "version": "1.0.0",
   "scripts": {
-    "install": "npm run lint && npm test",
     "lint": "node_modules/.bin/eslint ./",
     "start": "node index.js",
-    "test": "NODE_ENV=test node_modules/.bin/mocha test test/**/*.spec.js"
+    "test": "NODE_ENV=test node_modules/.bin/mocha test test/**/*.spec.js && yarn run lint"
   },
   "description": "How to receive MMS messages with node.js",
   "author": {
@@ -45,7 +44,7 @@
   "devDependencies": {
     "chai": "^4.0.2",
     "cheerio": "^1.0.0-rc.1",
-    "eslint": "^3.19.0",
+    "eslint": "^8.1.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
