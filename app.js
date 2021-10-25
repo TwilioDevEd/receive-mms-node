@@ -29,4 +29,36 @@ app.use((req, res, next) => {
 
 app.use('/', MessagingRouter());
 
+/**
+ * Error handlers
+ */
+
+/**
+ * development error handler
+ * will print stacktrace
+ */
+if (app.get('env') === 'development') {
+  // eslint-disable-next-line no-unused-vars
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err,
+    });
+  });
+}
+
+/**
+ * production error handler
+ * no stacktraces leaked to user
+ */
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {},
+  });
+});
+
 module.exports = app;
